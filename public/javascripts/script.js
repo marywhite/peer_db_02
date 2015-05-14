@@ -12,6 +12,18 @@ var $editPanel;
 var $editorSubmit;
 
 $(document).ready(function(){
+
+    $.ajax({
+        url: '/assignments/search',
+        data: {sort : -1 },
+        method: 'get',
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+        }
+    });
+
+
     $container = $('.js-assignments');
     $editPanel = $('.js-editPanel');
     $nameEditor = $('#name');
@@ -25,8 +37,8 @@ $(document).ready(function(){
 
 function getData(){
     $.ajax({
-        url: '/assignments',
-        data: {},
+        url: '/assignments/search',
+        data: {sort : -1 },
         method: 'get',
         dataType: 'json',
         success: function(data, textStatus, jqXHR){
