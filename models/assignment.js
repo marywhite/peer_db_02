@@ -6,5 +6,5 @@ var assignmentSchema = new mongoose.Schema({
     date_completed: Date
 });
 
-console.log('assignment model loaded')
+console.log('assignment model loaded');
 module.exports = mongoose.model('assignment', assignmentSchema);

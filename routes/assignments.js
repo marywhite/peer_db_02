@@ -43,16 +43,27 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-router.get('/search', function(req, res, next) {
-  assignments.find({}, null,
+router.get('/search', function (req, res, next) {
+
+  if (req.query.name) {
+    name = req.query.name;
+  } else {
+    name = {};
+  }
+
+  assignments.find({name: new RegExp(name, 'i')}, null,
       {
         sort: {
           name: req.query.sort
         }
       }
-      ,function (err, names) {
-        if (err) return next(err);
-        res.json(names);
+      , function (err, data) {
+
+        if (err) {
+          console.log(err);
+          return next(err);
+        }
+        res.json(data);
       });
 });
 

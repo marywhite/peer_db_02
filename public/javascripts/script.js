@@ -10,18 +10,10 @@ var $scoreEditor;
 var $dateEditor;
 var $editPanel;
 var $editorSubmit;
+var sort = 1;
+var name = '';
 
 $(document).ready(function(){
-
-    $.ajax({
-        url: '/assignments/search',
-        data: {sort : -1 },
-        method: 'get',
-        dataType: 'json',
-        success: function(data){
-            console.log(data);
-        }
-    });
 
 
     $container = $('.js-assignments');
@@ -33,12 +25,22 @@ $(document).ready(function(){
 
     getData();
     assignClicks();
+
+    $('.ascend').click(function(){
+        sort = 1;
+        getData();
+    });
+
+    $('.descend').click(function(){
+        sort = -1;
+        getData();
+    });
 });
 
 function getData(){
     $.ajax({
         url: '/assignments/search',
-        data: {sort : -1 },
+        data: {sort: sort, name: name},
         method: 'get',
         dataType: 'json',
         success: function(data, textStatus, jqXHR){
