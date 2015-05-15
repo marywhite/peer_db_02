@@ -35,6 +35,12 @@ $(document).ready(function(){
         sort = -1;
         getData();
     });
+
+    $('.search').click(function(){
+        name = $('.query').val();
+        getData();
+        $('.query').val = '';
+    });
 });
 
 function getData(){
